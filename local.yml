@@ -12,8 +12,9 @@
           - tmux
     
     - name: check if node is installed
-      shell: command -v node
+      shell: command --version python3
       register: node_exists
+      changed_when: false
       ignore_errors: yes
 
     - name: install node repository
