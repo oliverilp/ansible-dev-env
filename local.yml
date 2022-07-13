@@ -10,6 +10,9 @@
           - curl
           - htop
           - tmux
+          - gcc
+          - make
+          - build-essential
     
     - name: check if node is installed
       shell: command -v python3
