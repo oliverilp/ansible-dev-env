@@ -1,8 +1,14 @@
+---
 - hosts: localhost
   connection: local
   become: true
-
   tasks:
-  - name: Install packages
-    apt:
-      name: htop
+    - name: Install base packages
+      apt:
+        update_cache: yes
+        state: latest
+        name:
+          - neofetch
+          - curl
+          - htop
+          - tmux
