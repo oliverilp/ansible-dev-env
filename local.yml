@@ -15,7 +15,7 @@
           - build-essential
     
     - name: check if python is installed
-      shell: command -v python
+      shell: command -v python3
       register: node_exists
       changed_when: false
       ignore_errors: yes
