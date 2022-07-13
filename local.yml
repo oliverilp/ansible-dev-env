@@ -12,7 +12,7 @@
           - tmux
     
     - name: check if node is installed
-      shell: command --version python3
+      shell: command -v python3
       register: node_exists
       changed_when: false
       ignore_errors: yes
