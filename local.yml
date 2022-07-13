@@ -22,6 +22,6 @@
       no_log: yes
 
     - name: Print the gateway for each host when defined
+      when: node_exists is failed
       ansible.builtin.debug:
         msg: Node log
-      when: node_exists
