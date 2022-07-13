@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  connection: local
-  become: true
   tasks:
     - name: Install base packages
       apt:
