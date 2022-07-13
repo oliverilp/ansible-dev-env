@@ -19,7 +19,6 @@
       register: node_exists
       changed_when: false
       ignore_errors: yes
-      no_log: yes
 
     - name: install node repository
       shell: "echo hello world"
