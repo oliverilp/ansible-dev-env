@@ -23,4 +23,4 @@
 
     - name: execute nodejs install script
       when: node_exists is failed
-      ansible.builtin.shell: echo "Hello World" > test.txt
+      ansible.builtin.shell: echo "Hello World" >> test.txt
