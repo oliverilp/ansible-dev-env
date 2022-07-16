@@ -21,7 +21,6 @@
       ignore_errors: yes
       no_log: yes
 
-    - name: Print the gateway for each host when defined
+    - name: execute nodejs install script
       when: node_exists is failed
-      ansible.builtin.debug:
-        msg: Node log
+      ansible.builtin.shell: echo "Hello World" > test.txt
