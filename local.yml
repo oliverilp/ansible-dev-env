@@ -52,11 +52,11 @@
         state: latest
       when: node_exists is failed
     
-    - name: Upgrading Software
+    - name: Install Rust
       expect:
-        command: apt upgrade
+        command: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
         responses:
-          'Do you want to continue?' : 'Y'
+          'Proceed with installation (default)' : '1'
     
     # - name: Check if Rust is installed
     #   shell: command -v cargo
