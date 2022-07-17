@@ -46,7 +46,7 @@
         state: latest
     
     - name: Upgrading Software
-      expect:
+      ansible.builtin.expect:
         command: apt upgrade
         responses:
           'Do you want to continue? [Y/n]' : 'Y'
