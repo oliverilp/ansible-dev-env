@@ -10,6 +10,7 @@
           - curl
           - htop
           - tmux
+          - vim
           - gcc
           - make
           - build-essential
@@ -21,6 +22,5 @@
       ignore_errors: yes
       no_log: yes
 
-    - name: execute nodejs install script
-      when: node_exists is failed
-      ansible.builtin.shell: echo "Hello World" >> test.txt
+    - name: Creating a .txt file in $HOME
+      shell: echo "Save me!" > $HOME/test.txt
