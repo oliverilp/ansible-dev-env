@@ -20,6 +20,7 @@
         state: latest
         name:
           - neofetch
+          - sudo
           - curl
           - htop
           - tmux
@@ -44,14 +45,20 @@
         name: nodejs
         state: latest
     
-    - name: Check if Rust is installed
-      shell: command -v cargo
-      register: cargo_exists
-      changed_when: false
-      ignore_errors: yes
-      no_log: yes
+    - name: Upgrading Software
+      expect:
+        command: apt upgrade
+        responses:
+          'Do you want to continue? [Y/n]' : 'Y'
+    
+    # - name: Check if Rust is installed
+    #   shell: command -v cargo
+    #   register: cargo_exists
+    #   changed_when: false
+    #   ignore_errors: yes
+    #   no_log: yes
 
-    - name: Install Rust
-      shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-      when: cargo_exists is failed
+    # - name: Install Rust
+    #   shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    #   when: cargo_exists is failed
     
