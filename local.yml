@@ -1,6 +1,19 @@
 ---
 - hosts: all
   tasks:
+    - name: Disable SSH password auth
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "^#PasswordAuthentication yes"
+        line: "PasswordAuthentication no"
+      register: sshd_config
+    
+    - name: Restart SSHD daemon
+      service:
+        name: sshd
+        state: restarted
+      when: sshd_config.changed
+
     - name: Install base packages
       apt:
         update_cache: yes
@@ -15,14 +28,14 @@
           - make
           - build-essential
     
-    - name: Check if node is installed
+    - name: Check if Node.js is installed
       shell: command -v node
       register: node_exists
       changed_when: false
       ignore_errors: yes
       no_log: yes
 
-    - name: Install nodejs LTS repo
+    - name: Install Node.js LTS repo
       shell: curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
       when: node_exists is failed
     
@@ -31,15 +44,14 @@
         name: nodejs
         state: latest
     
-    - name: Disable SSH password auth
-      lineinfile:
-        dest: /etc/ssh/sshd_config
-        regexp: "^#PasswordAuthentication yes"
-        line: "PasswordAuthentication no"
-      register: sshd_config
+    - name: Check if Rust is installed
+      shell: command -v cargo
+      register: cargo_exists
+      changed_when: false
+      ignore_errors: yes
+      no_log: yes
+
+    - name: Install Rust
+      shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+      when: cargo_exists is failed
     
-    - name: Restart SSHD daemon
-      service:
-        name: sshd
-        state: restarted
-      when: sshd_config.changed
