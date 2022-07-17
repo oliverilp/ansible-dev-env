@@ -22,6 +22,11 @@
       ignore_errors: yes
       no_log: yes
 
-    - name: Creating a .txt file in $HOME
+    - name: Install nodejs LTS repo
       when: node_exists is failed
-      shell: echo "Save me!" > $HOME/test.txt
+      shell: curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+    
+    - name: Install nodejs LTS
+      apt:
+        name: nodejs
+        state: latest
