@@ -23,10 +23,23 @@
       no_log: yes
 
     - name: Install nodejs LTS repo
-      when: node_exists is failed
       shell: curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+      when: node_exists is failed
     
     - name: Install nodejs LTS
       apt:
         name: nodejs
         state: latest
+    
+    - name: Disable SSH password auth
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "^#PasswordAuthentication yes"
+        line: "PasswordAuthentication no"
+      register: sshd_config
+    
+    - name: Restart SSHD daemon
+      service:
+        name: sshd
+        state: restarted
+      when: sshd_config.changed
