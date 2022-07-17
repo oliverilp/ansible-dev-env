@@ -1,7 +1,7 @@
 ---
 - hosts: all
   tasks:
-    - name: install base packages
+    - name: Install base packages
       apt:
         update_cache: yes
         state: latest
@@ -15,8 +15,8 @@
           - make
           - build-essential
     
-    - name: check if python is installed
-      shell: command -v python3
+    - name: Check if node is installed
+      shell: command -v node
       register: node_exists
       changed_when: false
       ignore_errors: yes
