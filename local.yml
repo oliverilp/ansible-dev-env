@@ -54,7 +54,7 @@
     
     - name: Install Rust
       expect:
-        command: curl --proto \'=https\' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        command: "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
         responses:
           'Proceed with installation (default)' : '1'
     
