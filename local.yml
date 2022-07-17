@@ -19,6 +19,7 @@
         update_cache: yes
         state: latest
         name:
+          - python3-pip
           - neofetch
           - sudo
           - curl
@@ -28,6 +29,11 @@
           - gcc
           - make
           - build-essential
+    
+    # Python dependency for ansible.builtin.expect
+    - name: Install pexpect
+      pip:
+        name: pexpect
     
     - name: Check if Node.js is installed
       shell: command -v node
@@ -46,7 +52,7 @@
         state: latest
     
     - name: Upgrading Software
-      ansible.builtin.expect:
+      expect:
         command: apt upgrade
         responses:
           'Do you want to continue? [Y/n]' : 'Y'
