@@ -17,7 +17,7 @@
     - name: Install base packages
       apt:
         update_cache: yes
-        state: latest
+        state: present
         name:
           - python3-pip
           - neofetch
@@ -26,6 +26,7 @@
           - htop
           - tmux
           - vim
+          - zsh
           - gcc
           - make
           - build-essential
@@ -34,6 +35,18 @@
     - name: Install pexpect
       pip:
         name: pexpect
+    
+    - name: Install zsh
+      apt:
+        state: present
+        name:
+          - zsh
+      register: zsh_installed
+
+    - name: Install oh-my-zsh
+      #shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      shell: echo contents > /root/hello.txt
+      when: zsh_installed.changed
     
     - name: Check if Node.js is installed
       shell: command -v node
@@ -49,7 +62,7 @@
     - name: Install nodejs LTS
       apt:
         name: nodejs
-        state: latest
+        state: present
       when: node_exists is failed
     
     - name: Check if cargo is installed
