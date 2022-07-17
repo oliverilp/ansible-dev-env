@@ -15,12 +15,13 @@
           - make
           - build-essential
     
-    - name: check if node is installed
-      shell: command -v node
+    - name: check if python is installed
+      shell: command -v python3
       register: node_exists
       changed_when: false
       ignore_errors: yes
       no_log: yes
 
     - name: Creating a .txt file in $HOME
+      when: node_exists is failed
       shell: echo "Save me!" > $HOME/test.txt
