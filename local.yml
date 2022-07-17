@@ -54,7 +54,7 @@
     
     - name: Install Rust
       expect:
-        command: curl -sSf https://sh.rustup.rs | sh
+        command: curl -sSf https://sh.rustup.rs | bash -
         responses:
           'Proceed with installation (default)' : '1'
     
