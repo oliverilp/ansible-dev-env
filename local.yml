@@ -50,12 +50,13 @@
       apt:
         name: nodejs
         state: latest
+      when: node_exists is failed
     
     - name: Upgrading Software
       expect:
         command: apt upgrade
         responses:
-          'Do you want to continue? [Y/n]' : 'Y'
+          'Do you want to continue? \[Y/n\]' : 'Y'
     
     # - name: Check if Rust is installed
     #   shell: command -v cargo
